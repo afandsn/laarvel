@@ -1,3 +1,3 @@
 <footer>
-    <p>&copy; {{ date('Y') }} Toko Laravel</p>
+    <p>&copy; 2025 My E-Commerce Website</p>
 </footer>

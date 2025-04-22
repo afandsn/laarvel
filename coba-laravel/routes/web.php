@@ -13,9 +13,9 @@ Route::get('/', function () {
 Route::get('/product', [ProductController::class, 'index']);
 
 // Keranjang
-Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 // Checkout
 Route::get('/checkout', function () {

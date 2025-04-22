@@ -7,6 +7,7 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
+    // Tambahkan produk ke keranjang
     public function addToCart(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -21,8 +22,8 @@ class CartController extends Controller
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => $quantity,
-                'image' => $product->image, // Tambahkan ini
-            ];            
+                'image' => $product->image,
+            ];
         }
 
         session()->put('cart', $cart);
@@ -30,22 +31,23 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
 
+    // Tampilkan keranjang belanja
     public function showCart()
     {
-        $cart = session()->get('cart', []);
-        return view('cart', compact('cart'));
+        $cart = session()->get('cart', []); // Ambil data keranjang dari session
+        return view('cart', compact('cart')); // Kirim data ke view
     }
 
-    public function removeFromCart($id)
+    // Hapus produk dari keranjang
+    public function remove(Request $request, $id)
     {
-    $cart = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-    if (isset($cart[$id])) {
-        unset($cart[$id]);
-        session()->put('cart', $cart);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->route('cart')->with('success', 'Item berhasil dihapus dari keranjang.');
     }
-
-    return redirect()->route('cart.show')->with('success', 'Produk dihapus dari keranjang!');
-    }
-
 }

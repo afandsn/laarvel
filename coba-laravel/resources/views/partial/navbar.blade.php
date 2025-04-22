@@ -1,6 +1,7 @@
 <nav>
-    <a href="/">Beranda</a> |
-    <a href="/product">Produk</a> |
-    <a href="/cart">Keranjang</a>
-    <a href="checkout">daftar pesanan</a>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/product">Products</a></li>
+        <li><a href="/cart">Cart</a></li>
+    </ul>
 </nav>
