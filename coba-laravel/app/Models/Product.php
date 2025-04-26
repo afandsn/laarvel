@@ -1,5 +1,5 @@
 <?php
-
+// filepath: app/Models/Product.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,6 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
-    // ✅ tambahkan ini:
-    protected $fillable = ['name', 'price', 'description'];
+    protected $fillable = ['name', 'description', 'stock', 'image', 'price', 'category_id', 'clicks'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
