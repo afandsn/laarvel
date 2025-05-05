@@ -72,4 +72,28 @@ class ProductController extends Controller
 
         return view('product_detail', compact('product'));
     }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('product_edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($validated);
+
+        return redirect()->route('product.show', $product->id)
+            ->with('success', 'Produk berhasil diperbarui!');
+    }
 }

@@ -37,15 +37,19 @@ Route::resource('product', ProductController::class);
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::resource('category', CategoryController::class);
 
-// Cart
+// Cart & Checkout (harus login)
 Route::middleware('auth')->group(function () {
+    // Cart routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    
+    // Checkout routes
+    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('checkout');
+    Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout.process');
+    Route::get('/order/success/{order}', [OrderController::class, 'orderSuccess'])->name('order.success');
 });
-// Checkout
-Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 
 // Profile (autentikasi)
 Route::middleware('auth')->group(function () {

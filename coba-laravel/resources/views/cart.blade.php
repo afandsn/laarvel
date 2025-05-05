@@ -54,12 +54,9 @@
 
         {{-- Tombol Checkout --}}
         <div class="mt-6 flex justify-end">
-            <form action="{{ url('/checkout') }}" method="POST">
-                @csrf
-                <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 font-semibold">
-                    Checkout
-                </button>
-            </form>
+            <a href="{{ route('checkout') }}" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 font-semibold">
+                Checkout
+            </a>
         </div>
 
         {{-- Modal Update Keranjang --}}
